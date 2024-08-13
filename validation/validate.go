@@ -17,19 +17,40 @@ func ProcessingStdin() []string {
 
 func ValidateNumbers(numbers []string) {
 	for _, card_num := range numbers {
-		if !LuhnAlgorithm(card_num) {
-			fmt.Println("INCORRECT")
-			os.Exit(1)
+		if card_num[0] < '3' || card_num[0] > '5' {
+			ErrorOutput()
+		} else if len(card_num) < 13 || len(card_num) > 16 {
+			ErrorOutput()
+		} else if !LuhnAlgorithm(card_num) {
+			ErrorOutput()
 		}
-		if len(card_num) < 13 || len(card_num) > 16 {
-			fmt.Println("INCORRECT")
-			os.Exit(1)
-		}
+
 		for _, digit := range card_num {
 			if digit < '0' || digit > '9' {
-				fmt.Println("INCORRECT")
-				os.Exit(1)
+				ErrorOutput()
 			}
+		}
+		if card_num[0] == '4' && len(card_num) != 13 && len(card_num) != 16 {
+			ErrorOutput()
+		}
+		if card_num[0] == '5' {
+			if card_num[1] == '1' || card_num[1] == '2' || card_num[1] == '3' || card_num[1] == '4' || card_num[1] == '5' {
+				if len(card_num) != 16 {
+					ErrorOutput()
+				}
+			} else {
+				ErrorOutput()
+			}
+		}
+		if card_num[0] == '3' {
+			if card_num[1] == '7' || card_num[1] == '4' {
+				if len(card_num) != 15 {
+					ErrorOutput()
+				}
+			} else {
+				ErrorOutput()
+			}
+
 		}
 	}
 	for i := 0; i < len(numbers); i++ {
@@ -53,8 +74,10 @@ func LuhnAlgorithm(str string) bool {
 		}
 		is2 = !is2
 	}
-	if sum%10 == 0 {
-		return true
-	}
-	return false
+	return sum%10 == 0
+}
+
+func ErrorOutput() {
+	fmt.Println("INCORRECT")
+	os.Exit(1)
 }
