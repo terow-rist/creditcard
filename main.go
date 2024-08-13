@@ -14,7 +14,10 @@ func main() {
 
 	switch args[0] {
 	case "validate":
-		if len(args) != 1 && args[1] == "--stdin" {
+		if len(args) == 1 {
+			validation.ErrorOutput()
+		}
+		if args[1] == "--stdin" {
 			validation.ValidateNumbers(validation.ProcessingStdin())
 		} else {
 			validation.ValidateNumbers(args[1:])

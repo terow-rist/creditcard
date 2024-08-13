@@ -78,6 +78,6 @@ func LuhnAlgorithm(str string) bool {
 }
 
 func ErrorOutput() {
-	fmt.Println("INCORRECT")
+	fmt.Fprintln(os.Stderr, "INCORRECT")
 	os.Exit(1)
 }
