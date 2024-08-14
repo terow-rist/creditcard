@@ -8,9 +8,8 @@ import (
 )
 
 func ProcessingStdin() []string {
-	reader := os.Stdin
 	buf := new(strings.Builder)
-	io.Copy(buf, reader)
+	io.Copy(buf, os.Stdin)
 	input := buf.String()
 	return strings.Fields(input)
 }
@@ -50,10 +49,7 @@ func ValidateNumbers(numbers []string) {
 			} else {
 				ErrorOutput()
 			}
-
 		}
-	}
-	for i := 0; i < len(numbers); i++ {
 		fmt.Println("OK")
 	}
 	os.Exit(0)
