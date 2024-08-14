@@ -18,14 +18,8 @@ func ValidateNumbers(numbers []string) int {
 	for index, card_num := range numbers {
 		if !ValidationConditions(card_num) {
 			return index
-		} else if !LuhnAlgorithm(card_num) {
-			return index
 		}
-		for _, digit := range card_num {
-			if digit < '0' || digit > '9' {
-				return index
-			}
-		}
+
 	}
 	return len(numbers)
 }
@@ -64,6 +58,14 @@ func ValidationConditions(card_num string) bool {
 		return false
 	} else if len(card_num) < 13 || len(card_num) > 16 {
 		return false
+	} else if !LuhnAlgorithm(card_num) {
+		return false
+	}
+
+	for _, digit := range card_num {
+		if digit < '0' || digit > '9' {
+			return false
+		}
 	}
 
 	if card_num[0] == '4' && len(card_num) != 13 && len(card_num) != 16 {
