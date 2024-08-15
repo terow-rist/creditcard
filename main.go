@@ -33,12 +33,16 @@ func main() {
 			os.Exit(1)
 		}
 		asterics_counter := 0.0
+
+		end_of_asterics := false
 		for i := len(args[1]) - 1; i >= 0; i-- {
 			if args[1][i] == '*' {
-				if len(args[1])-5 > i {
+				if end_of_asterics {
 					os.Exit(1)
 				}
 				asterics_counter++
+			} else {
+				end_of_asterics = true
 			}
 			if asterics_counter > 4 {
 				os.Exit(1)
