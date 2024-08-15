@@ -54,3 +54,12 @@ func CreatingAllPossibleCards(asterics_counter float64, input string) []string {
 	}
 	return possible_cards
 }
+
+func IsNumber(num string, asterics_counter float64) bool {
+	for _, digit := range num[:len(num)-int(asterics_counter)] {
+		if digit < '0' || digit > '9' {
+			return false
+		}
+	}
+	return true
+}
