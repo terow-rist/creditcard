@@ -42,18 +42,16 @@ func main() {
 		}
 
 		if args[1] == "--pick" {
-			asterics_counter := generation.AstericsChecking(args[2])
-			if !generation.IsNumber(args[2], asterics_counter) {
+			if !generation.IsNumber(args[2]) {
 				os.Exit(1)
 			}
-			all_possible_cards := generation.CreatingAllPossibleCards(asterics_counter, args[2])
+			all_possible_cards := generation.CreatingAllPossibleCards(args[2])
 			fmt.Println(all_possible_cards[rand.Intn(len(all_possible_cards))])
 		} else {
-			asterics_counter := generation.AstericsChecking(args[1])
-			if !generation.IsNumber(args[1], asterics_counter) {
+			if !generation.IsNumber(args[1]) {
 				os.Exit(1)
 			}
-			for _, card := range generation.CreatingAllPossibleCards(asterics_counter, args[1]) {
+			for _, card := range generation.CreatingAllPossibleCards(args[1]) {
 				fmt.Println(card)
 			}
 		}

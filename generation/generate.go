@@ -28,7 +28,8 @@ func AstericsChecking(input string) float64 {
 	return asterics_counter
 }
 
-func CreatingAllPossibleCards(asterics_counter float64, input string) []string {
+func CreatingAllPossibleCards(input string) []string {
+	asterics_counter := AstericsChecking(input)
 	var card_from_stdin string
 	switch asterics_counter {
 	case 0:
@@ -55,8 +56,9 @@ func CreatingAllPossibleCards(asterics_counter float64, input string) []string {
 	return possible_cards
 }
 
-func IsNumber(num string, asterics_counter float64) bool {
-	for _, digit := range num[:len(num)-int(asterics_counter)] {
+func IsNumber(input string) bool {
+	asterics_counter := AstericsChecking(input)
+	for _, digit := range input[:len(input)-int(asterics_counter)] {
 		if digit < '0' || digit > '9' {
 			return false
 		}
