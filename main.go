@@ -2,6 +2,7 @@ package main
 
 import (
 	"creditcard/utils"
+	"fmt"
 	"os"
 )
 
@@ -15,5 +16,8 @@ func main() {
 		utils.HandleValidation(args)
 	case "generate":
 		utils.HandleGeneration(args)
+	case "information":
+		fmt.Println(utils.BrandsCheck(args[1], args[2]))
 	}
+
 }
