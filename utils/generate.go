@@ -1,11 +1,9 @@
-package generation
+package utils
 
 import (
 	"math"
 	"os"
 	"strconv"
-
-	"creditcard/validation"
 )
 
 func AstericsChecking(input string) float64 {
@@ -47,7 +45,7 @@ func CreatingAllPossibleCards(input string) []string {
 	card_in_int64, _ := strconv.ParseInt(card_from_stdin, 10, 64)
 	possible_cards := []string{}
 	for i := 0; i < int(math.Pow(10, asterics_counter)); i++ {
-		if validation.ValidationConditions(card_from_stdin) {
+		if ValidationConditions(card_from_stdin) {
 			possible_cards = append(possible_cards, card_from_stdin)
 		}
 		card_in_int64++
