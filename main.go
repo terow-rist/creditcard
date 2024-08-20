@@ -18,5 +18,9 @@ func main() {
 		utils.HandleGeneration(args)
 	case "information":
 		utils.HandleInformation(args)
+	case "issue":
+		utils.HandleIssue(args)
+	default:
+		os.Exit(1)
 	}
 }

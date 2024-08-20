@@ -34,6 +34,9 @@ func HandleGeneration(args []string) {
 			os.Exit(1)
 		}
 		all_possible_cards := CreatingAllPossibleCards(args[2])
+		if len(all_possible_cards) == 0 {
+			os.Exit(1)
+		}
 		fmt.Println(all_possible_cards[rand.Intn(len(all_possible_cards))])
 	} else {
 		CheckErrTooManyArgs(args, 2)
@@ -77,6 +80,16 @@ func HandleInformation(args []string) {
 		}
 		till_the_end++
 	}
+}
+
+func HandleIssue(args []string) {
+	CheckErrNilArgs(args, 1)
+	CheckErrNotEnoughArgs(args, 5)
+	CheckErrIncorrectCmd(args[1], "--brands=brands.txt")
+	CheckErrIncorrectCmd(args[2], "--issuers=issuers.txt")
+	CheckErrIncorrectCmd(args[3][:8], "--brand=")
+	CheckErrIncorrectCmd(args[3][:9], "--issuer=")
+	// notfinished
 }
 
 func CheckErrNotEnoughArgs(args []string, max_size int) {
