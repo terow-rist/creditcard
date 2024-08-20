@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"math/rand"
 	"os"
+	"strings"
 )
 
 const (
@@ -87,9 +88,18 @@ func HandleIssue(args []string) {
 	CheckErrNotEnoughArgs(args, 5)
 	CheckErrIncorrectCmd(args[1], "--brands=brands.txt")
 	CheckErrIncorrectCmd(args[2], "--issuers=issuers.txt")
-	CheckErrIncorrectCmd(args[3][:8], "--brand=")
-	CheckErrIncorrectCmd(args[3][:9], "--issuer=")
-	// notfinished
+	if strings.HasPrefix(args[3], "--brand=") && strings.HasPrefix(args[4], "--issuer=") {
+		brand, issuer := args[3][8:], args[4][9:]
+		brand_num, issuer_num := BrandsNumber(brand), IssuerNumber(issuer)
+		if len(brand_num) != 0 && len(issuer_num) != 0 && brand_num[0] == issuer_num[0] {
+			fmt.Println(IssueGenerate(issuer_num[0], issuer_num))
+		} else {
+			os.Exit(1)
+		}
+	} else {
+		fmt.Fprintln(os.Stderr, ErrIncorrectCmd)
+		os.Exit(1)
+	}
 }
 
 func CheckErrNotEnoughArgs(args []string, max_size int) {
