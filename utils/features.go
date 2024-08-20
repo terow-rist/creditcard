@@ -51,8 +51,16 @@ func HandleInformation(args []string) {
 	CheckErrNotEnoughArgs(args, 4)
 	CheckErrIncorrectCmd(args[1], "--brands=brands.txt")
 	CheckErrIncorrectCmd(args[2], "--issuers=issuers.txt")
+
+	var cards []string
+	if args[3] == "--stdin" {
+		cards = ProcessingStdin()
+		fmt.Println()
+	} else {
+		cards = args[3:]
+	}
 	till_the_end := 0
-	for _, card := range args[3:] {
+	for _, card := range cards {
 		if ValidationConditions(card) {
 			fmt.Println(card)
 			fmt.Println("Correct: yes")
@@ -64,7 +72,7 @@ func HandleInformation(args []string) {
 			fmt.Println("Card Brand: -")
 			fmt.Println("Card Issuer: -")
 		}
-		if till_the_end != len(args[3:])-1 {
+		if till_the_end != len(cards)-1 {
 			fmt.Println()
 		}
 		till_the_end++

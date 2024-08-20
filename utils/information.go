@@ -43,3 +43,8 @@ func IssuerCheck(card string) string {
 	}
 	return "-"
 }
+
+/*
+Examples:
+	4400430180300003 4042430180300007 5177920000000005 4405630000005 awd 5395450000000009
+*/
