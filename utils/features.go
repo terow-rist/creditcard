@@ -2,6 +2,7 @@ package utils
 
 import (
 	"fmt"
+	"io"
 	"math/rand"
 	"os"
 	"strings"
@@ -128,4 +129,11 @@ func CheckErrIncorrectCmd(cmd string, excepted_cmd string) {
 		fmt.Fprintln(os.Stderr, ErrIncorrectCmd)
 		os.Exit(1)
 	}
+}
+
+func ProcessingStdin() []string {
+	buf := new(strings.Builder)
+	io.Copy(buf, os.Stdin)
+	input := buf.String()
+	return strings.Fields(input)
 }

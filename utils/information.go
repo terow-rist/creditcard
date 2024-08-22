@@ -18,7 +18,12 @@ func BrandsCheck(card string) string {
 
 	for _, line := range lines {
 		slc_of_brand := strings.Split(line, ":")
-		brands[string(slc_of_brand[1][0])] = slc_of_brand[0]
+		if len(slc_of_brand) < 2 {
+			continue
+		}
+		if len(slc_of_brand[1]) > 0 {
+			brands[string(slc_of_brand[1][0])] = slc_of_brand[0]
+		}
 	}
 
 	if brands[string(card[0])] == "" {
@@ -37,6 +42,9 @@ func IssuerCheck(card string) string {
 	lines := strings.Split(string(content), "\n")
 	for _, line := range lines {
 		slc_of_issuer := strings.Split(line, ":")
+		if len(slc_of_issuer) < 2 {
+			continue
+		}
 		if strings.HasPrefix(card, slc_of_issuer[1]) {
 			return slc_of_issuer[0]
 		}

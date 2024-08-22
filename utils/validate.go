@@ -2,24 +2,14 @@ package utils
 
 import (
 	"fmt"
-	"io"
 	"os"
-	"strings"
 )
-
-func ProcessingStdin() []string {
-	buf := new(strings.Builder)
-	io.Copy(buf, os.Stdin)
-	input := buf.String()
-	return strings.Fields(input)
-}
 
 func ValidateNumbers(numbers []string) int {
 	for index, card_num := range numbers {
 		if !ValidationConditions(card_num) {
 			return index
 		}
-
 	}
 	return len(numbers)
 }
